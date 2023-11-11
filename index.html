@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Raji</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="sky" src="sky.jpg">
+        <a-asset-item id="taj" src="assets/taj/scene.gltf"></a-asset-item>
+        <a-asset-item id="cake" src="assets/cake/scene.gltf"></a-asset-item>
+      </a-assets>
+      <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
+      <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
+      <!-- Text -->
+      <a-text value="Happy Birthday Rajashree <3" position="-5 5 -5" color="#FFD700" scale="2 2 2"></a-text>
+      <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky src="#sky"></a-sky>
+    </a-scene>
+  </body>
+</html>
