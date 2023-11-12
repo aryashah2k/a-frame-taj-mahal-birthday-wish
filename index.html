@@ -55,40 +55,30 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        // Get the cursor element
-        var cursor = document.querySelector('a-cursor');
+        // Get the camera element
+        var camera = document.querySelector('a-camera');
 
         // Set the initial position
-        var position = { x: 0, y: 0, z: -1 };
+        var position = { x: 0, y: 0, z: 0 };
 
-        // Set the speed at which the cursor moves
+        // Set the speed at which the camera moves forward
         var speed = 0.1;
 
-        // Function to update the cursor position based on tap event
-        function moveCursor(event) {
-          // Get the tap position
-          var tapX = event.detail.intersection.point.x;
-          var tapY = event.detail.intersection.point.y;
+        // Function to update the camera position based on tap event
+        function moveCamera(event) {
+          // Get the current camera position
+          var currentPosition = camera.getAttribute('position');
 
-          // Calculate the direction to move the cursor
-          var deltaX = tapX - position.x;
-          var deltaY = tapY - position.y;
-
-          // Normalize the direction vector
-          var length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-          var normalizedX = deltaX / length;
-          var normalizedY = deltaY / length;
-
-          // Update the cursor position
-          position.x += normalizedX * speed;
-          position.y += normalizedY * speed;
-
-          // Set the new position
-          cursor.setAttribute('position', position);
+          // Update the camera position to move forward
+          camera.setAttribute('position', {
+            x: currentPosition.x,
+            y: currentPosition.y,
+            z: currentPosition.z - speed
+          });
         }
 
         // Add tap event listener to the scene
-        document.querySelector('a-scene').addEventListener('click', moveCursor);
+        document.querySelector('a-scene').addEventListener('click', moveCamera);
       });
     </script>
   </body>
