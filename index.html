@@ -39,18 +39,39 @@
       <a-asset-item id="cake" src="assets/cake/scene.gltf"></a-asset-item>
     </a-assets>
 
-    <a-entity position="0 1.6 0">
+    <a-entity position="0 1.6 3">
       <a-camera wasd-controls look-controls>
         <a-cursor></a-cursor>
       </a-camera>
     </a-entity>
 
-    <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
-    <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
+    <!-- Add event listeners for zooming in -->
+    <a-entity
+      gltf-model="#taj"
+      position="0 0 -5"
+      scale="25 25 35"
+      event-set__startZoom="_event: mouseenter; _timeout: 3000"
+      event-set__stopZoom="_event: mouseleave"
+      event-set__triggerZoom="_event: zoomComplete"
+    ></a-entity>
+
+    <a-entity
+      gltf-model="#cake"
+      position="-2.3 1.25 -5.85"
+      scale="0.2 0.2 0.2"
+      event-set__startZoom="_event: mouseenter; _timeout: 3000"
+      event-set__stopZoom="_event: mouseleave"
+      event-set__triggerZoom="_event: zoomComplete"
+    ></a-entity>
 
     <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
     <a-sky src="#sky"></a-sky>
+
+    <!-- Animation to zoom in -->
+    <a-entity
+      animation__zoom="property: scale; to: 15 15 25; dur: 2000"
+      event-set__zoomComplete="_event: animationcomplete-zoom"
+    ></a-entity>
   </a-scene>
 </body>
 </html>
-
