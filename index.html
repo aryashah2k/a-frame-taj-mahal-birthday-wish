@@ -31,7 +31,7 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
   <body>
-    <a-scene cursor="rayOrigin: mouse">
+    <a-scene>
       <a-assets>
         <img id="sky" src="sky.jpg">
         <a-asset-item id="taj" src="assets/taj/scene.gltf"></a-asset-item>
@@ -42,46 +42,23 @@
       <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky src="#sky"></a-sky>
 
-      <!-- Add cursor and event-set components -->
-      <a-entity cursor="rayOrigin: mouse"></a-entity>
-      <a-entity id="camera" camera look-controls>
+      <a-entity camera look-controls>
+        <!-- Cursor component -->
+        <a-entity cursor="rayOrigin: mouse"></a-entity>
+
+        <!-- Event set component to start timer on mouseenter -->
         <a-entity
-          id="cursor-listener"
-          cursor-listener
-          event-set__1="_event: mouseenter;_timeout: 2000"
+          event-set__startTimer="_event: mouseenter; _timeout: 2000"
+          event-set__stopTimer="_event: mouseleave"
+        ></a-entity>
+
+        <!-- Custom action on timer completion -->
+        <a-entity
+          animation__move="property: position; to: 0 0 -10; dur: 2000"
+          event-set__move="_event: timercomplete"
         ></a-entity>
       </a-entity>
-
-      <!-- Define cursor listener component -->
-      <a-entity id="cursor-listener" cursor-listener></a-entity>
     </a-scene>
-
-    <script>
-      AFRAME.registerComponent("cursor-listener", {
-        init: function () {
-          var el = this.el;
-
-          el.addEventListener("mouseenter", function () {
-            el.emit("startTimer");
-          });
-
-          el.addEventListener("mouseleave", function () {
-            el.emit("stopTimer");
-          });
-
-          el.addEventListener("startTimer", function () {
-            el.timer = setTimeout(function () {
-              // You can add your custom action here, such as moving the camera forward
-              el.sceneEl.camera.el.object3D.translateZ(-1);
-            }, 2000); // 2000 milliseconds (2 seconds)
-          });
-
-          el.addEventListener("stopTimer", function () {
-            clearTimeout(el.timer);
-          });
-        },
-      });
-    </script>
   </body>
 </html>
 
