@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,9 +16,72 @@
       <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
       <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
       <!-- Text -->
-      <!--<a-text value="Happy Birthday Rajashree <3" position="-5 5 -5" color="#FFD700" scale="2 2 2"></a-text>-->
+      <!--<a-text value="Happy Birthday Rajashree <3" position="-5 5 -5" color="#FFD700" scale="2 2 2"></a-text>
       <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky src="#sky"></a-sky>
     </a-scene>
   </body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Raji</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+  <body>
+    <a-scene cursor="rayOrigin: mouse">
+      <a-assets>
+        <img id="sky" src="sky.jpg">
+        <a-asset-item id="taj" src="assets/taj/scene.gltf"></a-asset-item>
+        <a-asset-item id="cake" src="assets/cake/scene.gltf"></a-asset-item>
+      </a-assets>
+      <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
+      <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
+      <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky src="#sky"></a-sky>
+
+      <!-- Add cursor and event-set components -->
+      <a-entity cursor="rayOrigin: mouse"></a-entity>
+      <a-entity id="camera" camera look-controls>
+        <a-entity
+          id="cursor-listener"
+          cursor-listener
+          event-set__1="_event: mouseenter;_timeout: 2000"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Define cursor listener component -->
+      <a-entity id="cursor-listener" cursor-listener></a-entity>
+    </a-scene>
+
+    <script>
+      AFRAME.registerComponent("cursor-listener", {
+        init: function () {
+          var el = this.el;
+
+          el.addEventListener("mouseenter", function () {
+            el.emit("startTimer");
+          });
+
+          el.addEventListener("mouseleave", function () {
+            el.emit("stopTimer");
+          });
+
+          el.addEventListener("startTimer", function () {
+            el.timer = setTimeout(function () {
+              // You can add your custom action here, such as moving the camera forward
+              el.sceneEl.camera.el.object3D.translateZ(-1);
+            }, 2000); // 2000 milliseconds (2 seconds)
+          });
+
+          el.addEventListener("stopTimer", function () {
+            clearTimeout(el.timer);
+          });
+        },
+      });
+    </script>
+  </body>
 </html>
+
