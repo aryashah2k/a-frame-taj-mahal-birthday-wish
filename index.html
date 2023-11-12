@@ -22,6 +22,7 @@
     </a-scene>
   </body>
 </html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,35 +31,26 @@
     <title>Happy Birthday Raji</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
-  <body>
-    <a-scene>
-      <a-assets>
-        <img id="sky" src="sky.jpg">
-        <a-asset-item id="taj" src="assets/taj/scene.gltf"></a-asset-item>
-        <a-asset-item id="cake" src="assets/cake/scene.gltf"></a-asset-item>
-      </a-assets>
-      <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
-      <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
-      <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky src="#sky"></a-sky>
+<body>
+  <a-scene>
+    <a-assets>
+      <img id="sky" src="sky.jpg">
+      <a-asset-item id="taj" src="assets/taj/scene.gltf"></a-asset-item>
+      <a-asset-item id="cake" src="assets/cake/scene.gltf"></a-asset-item>
+    </a-assets>
 
-      <a-entity camera look-controls>
-        <!-- Cursor component -->
-        <a-entity cursor="rayOrigin: mouse"></a-entity>
+    <a-entity position="0 1.6 0">
+      <a-camera wasd-controls look-controls>
+        <a-cursor></a-cursor>
+      </a-camera>
+    </a-entity>
 
-        <!-- Event set component to start timer on mouseenter -->
-        <a-entity
-          event-set__startTimer="_event: mouseenter; _timeout: 2000"
-          event-set__stopTimer="_event: mouseleave"
-        ></a-entity>
+    <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
+    <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
 
-        <!-- Custom action on timer completion -->
-        <a-entity
-          animation__move="property: position; to: 0 0 -5; dur: 2000"
-          event-set__move="_event: timercomplete"
-        ></a-entity>
-      </a-entity>
-    </a-scene>
-  </body>
+    <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+    <a-sky src="#sky"></a-sky>
+  </a-scene>
+</body>
 </html>
 
