@@ -22,7 +22,6 @@
     </a-scene>
   </body>
 </html>-->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,7 +39,7 @@
       </a-assets>
 
       <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
-      <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity id="cakeEntity" gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
 
       <!-- Text -->
       <a-text value="Happy Birthday Rajashree <3" position="-5 5 -5" color="#FFD700" scale="2 2 2"></a-text>
@@ -53,24 +52,22 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        // Add tap event listener to the scene
-        document.querySelector('a-scene').addEventListener('click', function () {
-          // Get the camera element
-          var camera = document.querySelector('a-camera');
+        // Get the cake entity
+        var cakeEntity = document.querySelector('#cakeEntity');
 
-          // Set the speed at which the camera moves forward
-          var speed = 0.5;
+        // Set the camera position in front of the cake at a certain distance
+        var distance = 5; // Adjust the distance as needed
 
-          // Get the current camera position
-          var currentPosition = camera.getAttribute('position = "2.3 1.25 10"');
+        // Calculate the new camera position
+        var cakePosition = cakeEntity.getAttribute('position');
+        var newCameraPosition = {
+          x: cakePosition.x,
+          y: cakePosition.y,
+          z: cakePosition.z + distance
+        };
 
-          // Update the camera position to move forward
-          camera.setAttribute('position', {
-            x: currentPosition.x,
-            y: currentPosition.y,
-            z: currentPosition.z - speed
-          });
-        });
+        // Set the new camera position
+        document.querySelector('a-camera').setAttribute('position', newCameraPosition);
       });
     </script>
   </body>
