@@ -22,6 +22,7 @@
     </a-scene>
   </body>
 </html>-->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,14 +41,12 @@
 
       <a-entity gltf-model="#taj" position="0 0 -5" scale="25 25 35"></a-entity>
       <a-entity gltf-model="#cake" position="-2.3 1.25 -5.85" scale="0.2 0.2 0.2"></a-entity>
-
       <!-- Text -->
       <a-text value="Happy Birthday Rajashree <3" position="-5 5 -5" color="#FFD700" scale="2 2 2"></a-text>
       <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky src="#sky"></a-sky>
-
       <!-- Camera with wasd-controls for movement -->
-      <a-camera wasd-controls look-controls></a-camera>
+      <a-camera wasd-controls look-controls position="-2.3 1.25 10"></a-camera>
     </a-scene>
 
     <script>
@@ -55,10 +54,10 @@
         // Add tap event listener to the scene
         document.querySelector('a-scene').addEventListener('click', function () {
           // Get the camera element
-          var camera = document.querySelector('cake');
+          var camera = document.querySelector('a-camera');
 
           // Set the speed at which the camera moves forward
-          var speed = 0.5;
+          var speed = 0.1;
 
           // Get the current camera position
           var currentPosition = camera.getAttribute('position');
@@ -74,3 +73,4 @@
     </script>
   </body>
 </html>
+
